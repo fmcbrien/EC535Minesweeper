@@ -1,4 +1,4 @@
-# BetterMinesweeper
+# EC535Minesweeper
 
 - minesweeper/
   - src/
