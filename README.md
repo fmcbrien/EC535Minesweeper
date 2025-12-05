@@ -3,8 +3,9 @@
 - minesweeper/
   - src/
     - main.cpp
-    - other cpp files for game support
-      - probaby a board setup file, a gameplay file, a cell control file, etc.
+    - MainWindow.cpp
+    - GameBoard.cpp
+    - CellButton.cpp
   - assets/
     - mine pic
     - tile pic
