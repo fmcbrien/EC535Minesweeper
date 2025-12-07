@@ -4,7 +4,7 @@
 
 CellButton::CellButton(int row, int col, QWidget* parent)
     : QPushButton(parent), row_(row), col_(col) {
-    setFixedSize(40, 40);
+    setFixedSize(28, 28);
     setCheckable(false);
     longClickTimer.setInterval(600); // 600 ms for long press
     longClickTimer.setSingleShot(true);

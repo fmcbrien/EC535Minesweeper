@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     board = std::make_unique<GameBoard>(9, 9, 10, this);
     centralWidget = new QWidget(this);
     gridLayout = new QGridLayout(centralWidget);
-    gridLayout->setSpacing(4);
+    gridLayout->setSpacing(0);
     centralWidget->setLayout(gridLayout);
     setCentralWidget(centralWidget);
 
