@@ -12,21 +12,18 @@ This is an implementation of Minesweeper developed as a userspace game for the f
 
 2. Build the project
    - [insert compiling instructions which will hopefully be the following]
-   - `mkdir build && cd build`
-   - `make`
+   - `qmake`
+   - 'make'
+   - upload minesweeper file to beaglebone
 3. Run Game
-   - will hopefully be `./minesweerper`
+   - will hopefully be `./minesweeper -platform linuxfb:fb=/dev/fb0`
 
 ## Folder Contents/Structure
 
-- minesweeper/
-  - src/
-    - main.cpp
-    - MainWindow.cpp
-    - GameBoard.cpp
-    - CellButton.cpp
-  - assets/
-    - mine pic
-    - tile pic
-    - flag pic
-    - exploded mine pic
+  - main.cpp
+  - MainWindow.cpp
+  - GameBoard.cpp
+  - CellButton.cpp
+  
+  - minesweeper_bomb.png
+  - minesweeper_flag.png
