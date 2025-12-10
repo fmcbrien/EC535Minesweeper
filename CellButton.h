@@ -15,6 +15,8 @@ public:
     void setStateFlagged();
     void setStateRevealed(int adjacentMines);
 
+    void setStateRevealedStyle();
+
 signals:
     void clicked(int row, int col);         //short click = reveal tile
     void longClicked(int row, int col);     //long click = toggle flag

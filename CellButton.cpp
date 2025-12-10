@@ -4,7 +4,7 @@
 
 CellButton::CellButton(int row, int col, QWidget* parent)
     : QPushButton(parent), row_(row), col_(col) {
-    setFixedSize(28, 28);
+    setFixedSize(50, 28);
     setCheckable(false);
     longClickTimer.setInterval(600); // 600 ms for long press
     longClickTimer.setSingleShot(true);
@@ -65,4 +65,19 @@ void CellButton::setStateRevealed(int adjacentMines) {
         setText("");
     }
     setEnabled(false);
+}
+
+// WHEN TILE IS REVEALED 
+void CellButton::setStateRevealedStyle(){
+    //PREVENT RECLICKING
+    setEnabled(false);
+
+    // SET THE STYLE
+    setStyleSheet(
+        "QPushButton {"
+        " background-color: #353535ff;"  
+        " border: 1px solid #000000ff;"  
+        " font-weight: bold;"
+        "}"
+    );
 }

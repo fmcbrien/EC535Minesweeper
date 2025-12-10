@@ -65,11 +65,49 @@ void MainWindow::onCellLongClicked(int row, int col) {
 void MainWindow::onCellModelChanged(int row, int col) {
     const Cell &cell = board->at(row, col);
     CellButton* btn = buttons[row * board->colCount() + col];
+
+    // SET THE REVEALED CELL TO A DARKEN STYLE 
+    btn->setStateRevealedStyle();
+
     if (cell.state == CellState::Hidden) btn->setStateHidden();
     else if (cell.state == CellState::Flagged) btn->setStateFlagged();
     else if (cell.state == CellState::Revealed) {
         if (cell.hasMine) btn->setMine(true);
         else btn->setStateRevealed(cell.adjacentMines);
+    }
+
+    // IF TILE IS MORE THAN 0, SET A COLOR ACCORDING TO NUM
+    if (cell.adjacentMines > 0){
+        btn->setText(QString::number(cell.adjacentMines));
+
+        QString color;
+        
+        switch (cell.adjacentMines){
+        case 1: color = "blue"; break;
+        case 2: color = "green"; break;
+        case 3: color = "red"; break;
+        case 4: color = "purple"; break;
+        default: color = "black";
+    }
+
+    btn->setStyleSheet(QString(
+        "QPushButton {"
+        "background-color: #A0A0A0;"
+        "border: 1px solid #707070;"
+        "color: %1;"
+        "font-weight: bold;"
+        "}"
+    ).arg(color));
+    }
+    else {
+        btn->setText("");
+        btn->setStyleSheet(
+            "QPushButton {"
+            "background-color: #A0A0A0;" 
+            "border: 1px solid #707070;"
+            "color: black;"
+            "}"
+        );
     }
 }
 
