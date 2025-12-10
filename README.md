@@ -11,12 +11,11 @@ This is an implementation of Minesweeper developed as a userspace game for the f
   - C++
 
 2. Build the project
-   - [insert compiling instructions which will hopefully be the following]
    - `qmake`
-   - 'make'
+   - `make`
    - upload minesweeper file to beaglebone
 3. Run Game
-   - will hopefully be `./minesweeper -platform linuxfb:fb=/dev/fb0`
+   - `./minesweeper -platform linuxfb:fb=/dev/fb0`
 
 ## Folder Contents/Structure
 
