@@ -12,7 +12,7 @@ public:
     void setNumber(int num);
     void setMine(bool mine);
     void setStateHidden();
-    void setStateFlagged();
+    void setStateFlagged(const QIcon &icon);
     void setStateRevealed(int adjacentMines);
 
     void setStateRevealedStyle();

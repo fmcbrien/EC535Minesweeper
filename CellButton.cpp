@@ -53,9 +53,11 @@ void CellButton::setStateHidden() {
     setEnabled(true);
 }
 
-void CellButton::setStateFlagged() {
-    setText("F");
+void CellButton::setStateFlagged(const QIcon &icon) {
+    setText("");
     setEnabled(true);
+    setIcon(icon);
+    setIconSize(QSize(20,20));
 }
 
 void CellButton::setStateRevealed(int adjacentMines) {

@@ -29,4 +29,7 @@ private:
     std::unique_ptr<GameBoard> board;
     std::vector<CellButton*> buttons;
     void rebuildGrid(int rows, int cols);
+
+    QIcon flagIcon;
+    QIcon bombIcon;
 };

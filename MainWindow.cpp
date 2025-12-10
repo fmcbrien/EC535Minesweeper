@@ -30,6 +30,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     connect(board.get(), &GameBoard::gameWon, this, &MainWindow::onGameWon);
 
     rebuildGrid(board->rowCount(), board->colCount());
+
+    bombIcon = QIcon("minesweeper_bomb.png");
+    flagIcon = QIcon("minesweeper_flag.png");
 }
 
 void MainWindow::rebuildGrid(int rows, int cols) {
@@ -70,8 +73,30 @@ void MainWindow::onCellModelChanged(int row, int col) {
     const Cell &cell = board->at(row, col);
     CellButton* btn = buttons[row * board->colCount() + col];
 
+    // CLEAR ICONS
+    btn->setIcon(QIcon());
+    btn->setText("");
+    
     // SET THE REVEALED CELL TO A DARKEN STYLE 
     btn->setStateRevealedStyle();
+
+    // CHECK IF FLAGGED
+    // IF SO ADD THE CUSTOM FLAG ICON
+    if (cell.state == CellState::Flagged){
+        QPixmap flag("minesweeper_flag.png");
+
+        btn->setIcon(QIcon(flag));
+        btn->setIconSize(QSize(20, 20));
+
+        btn->setStyleSheet(
+            "QPushButton {"
+            "background-color: #C0C0C0;"
+            "border: 1px solid #707070;"
+            "padding: 0px;"
+            "}"
+        );
+        return;
+    }
 
     // CHECK IF MINE
     // IF SO ADD THE CUSTOM MINE ICON
@@ -93,7 +118,7 @@ void MainWindow::onCellModelChanged(int row, int col) {
     }
 
     if (cell.state == CellState::Hidden) btn->setStateHidden();
-    else if (cell.state == CellState::Flagged) btn->setStateFlagged();
+    else if (cell.state == CellState::Flagged) btn->setStateFlagged(QIcon("minesweeper_flag.png"));
     else if (cell.state == CellState::Revealed) {
         if (cell.hasMine) btn->setMine(true);
         else btn->setStateRevealed(cell.adjacentMines);
