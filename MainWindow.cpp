@@ -6,6 +6,10 @@
 #include <QStatusBar>
 #include <QMessageBox>
 
+// INCLUDE FOR ICONS
+#include <QPixmap>
+#include <QIcon>
+
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     board = std::make_unique<GameBoard>(9, 9, 10, this);
     centralWidget = new QWidget(this);
@@ -68,6 +72,25 @@ void MainWindow::onCellModelChanged(int row, int col) {
 
     // SET THE REVEALED CELL TO A DARKEN STYLE 
     btn->setStateRevealedStyle();
+
+    // CHECK IF MINE
+    // IF SO ADD THE CUSTOM MINE ICON
+    if (cell.hasMine){
+        QPixmap bomb("minesweeper_bomb.png");
+
+        btn->setText("");
+        btn->setIcon(QIcon(bomb));
+        btn->setIconSize(QSize(20,20));
+
+        btn->setStyleSheet(
+            "QPushButton {"
+            "background-color: #808080;"
+            "border: 1px solid #505050;"
+            "padding: 0px;"
+            "}"
+        );
+        return;
+    }
 
     if (cell.state == CellState::Hidden) btn->setStateHidden();
     else if (cell.state == CellState::Flagged) btn->setStateFlagged();
