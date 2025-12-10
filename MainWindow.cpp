@@ -40,10 +40,16 @@ void MainWindow::rebuildGrid(int rows, int cols) {
     qDeleteAll(buttons);
     buttons.clear();
 
+    int buttonWidth = 480 / cols;
+    int buttonHeight = 272 / rows;
+
     // Create new buttons
     for (int r = 0; r < rows; ++r) {
         for (int c = 0; c < cols; ++c) {
             CellButton* btn = new CellButton(r, c, centralWidget);
+
+            btn->setFixedSize(buttonWidth, buttonHeight);
+
             gridLayout->addWidget(btn, r, c);
 
             connect(btn, &CellButton::clicked, this, &MainWindow::onCellClicked);
@@ -52,7 +58,8 @@ void MainWindow::rebuildGrid(int rows, int cols) {
             buttons.push_back(btn);
         }
     }
-    adjustSize();
+    // adjustSize();
+    this->setFixedSize(480, 272);
 }
 
 void MainWindow::newGame() {
