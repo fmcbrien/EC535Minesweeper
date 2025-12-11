@@ -10,6 +10,7 @@
 #include <QPixmap>
 #include <QIcon>
 
+// SET UI, MENU BAR, GAMEBOARD AND SIGNALS
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     board = std::make_unique<GameBoard>(9, 9, 10, this);
     centralWidget = new QWidget(this);
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     flagIcon = QIcon("minesweeper_flag.png");
 }
 
+// REGENERATE GRID WHEN A NEW GAME IS CALLED
 void MainWindow::rebuildGrid(int rows, int cols) {
     // Clear existing buttons
     qDeleteAll(buttons);
@@ -62,20 +64,24 @@ void MainWindow::rebuildGrid(int rows, int cols) {
     this->setFixedSize(480, 272);
 }
 
+// RESETS GAME LOGIC AND REBUILD UI GRID
 void MainWindow::newGame() {
     board->reset(9, 9, 10);
     rebuildGrid(board->rowCount(), board->colCount());
     statusBar()->showMessage("New game started!");
 }
 
+// WHEN USER CLICKS CELL TRIGGER REVEAL LOGIC
 void MainWindow::onCellClicked(int row, int col) {
     board->revealCell(row, col);
 }
 
+// WHEN USER LONG CLICKS TOGGLE FLAGGING
 void MainWindow::onCellLongClicked(int row, int col) {
     board->toggleFlag(row, col);
 }
 
+// UPDATE UI BASED ON CELL STATE CHANGE IN GAMEBOARD
 void MainWindow::onCellModelChanged(int row, int col) {
     const Cell &cell = board->at(row, col);
     CellButton* btn = buttons[row * board->colCount() + col];
@@ -166,11 +172,13 @@ void MainWindow::onCellModelChanged(int row, int col) {
     }
 }
 
+// GAME LOST
 void MainWindow::onGameLost() {
     statusBar()->showMessage("Game over! You lost.");
     QMessageBox::information(this, "Game Over", "You hit a mine.");
 }
 
+// GAME WON
 void MainWindow::onGameWon() {
     statusBar()->showMessage("Congratulations! You won.");
     QMessageBox::information(this, "Congratulations", "You cleared the minefield!");
